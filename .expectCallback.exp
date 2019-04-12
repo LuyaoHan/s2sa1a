@@ -1,0 +1,20 @@
+#!/usr/bin/expect
+
+set PASSWD   [lrange $argv 0 0]
+set RepoName [lrange $argv 1 1]
+set USER     [lrange $argv 2 2]
+set URL [lrange $argv 3 3]
+
+#spawn git remote add origin $USER
+
+spawn git init
+spawn git add .
+
+spawn git commit -m "Initial Commit "
+spawn git push -u origin master
+
+expect "Username for 'https://github.com':"
+send $USER\n
+expect "Password for"
+send $PASSWD\n
+interact
